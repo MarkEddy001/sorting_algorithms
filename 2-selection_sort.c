@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * selection_sort - Applies the selection sort algorithm 
+ * selection_sort - Applies the selection sort algorithm
  *                  to arrange an array in ascending order.
  *
  * @array: The array to be sorted.
@@ -9,26 +9,32 @@
  */
 void selection_sort(int *array, size_t size)
 {
-	unsigned int index1, index3;
-	int min = 0, index = 0;
+	int index1, index2, pos;
+	int min, temp, flag;
 
-	for (index1 = 0; index1 < size; index1 += 1)
+	if (size < 2)
+		return;
+	for (index1 = 0; (size_t)index1 < size; index1++)
 	{
+		flag = 0;
 		min = array[index1];
-		for (index3 = index1; index3 < size; index3 += 1)
+		if ((size_t)index1 == size - 1)
+			break;
+		for (index2 = index1; (size_t)index2 < size; index2++)
 		{
-			if (array[index3] < min)
+			if (min > array[index2])
 			{
-				min = array[index3];
-				index = index3;
+				min = array[index2];
+				pos = index2;
+				flag = 1;
 			}
 		}
-		if (min != array[index1])
+		if (flag)
 		{
-			array[index] = array[index1];
-			array[index1] = min;
+			temp = array[index1];
+			array[index1] = array[pos];
+			array[pos] = temp;
 			print_array(array, size);
 		}
-
 	}
 }
