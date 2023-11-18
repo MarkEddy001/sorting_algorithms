@@ -1,10 +1,10 @@
-#include "sort.h"
 #include <stdlib.h>
 
 void swap_list(listint_t *curr, listint_t *prev, listint_t **head);
 
 /**
- * cocktail_sort_list - Applies the Cocktail Sort algorithm to sort a Doubly Linked List.
+ * cocktail_sort_list - Applies the Cocktail Sort algorithm
+ *                      to sort a Doubly Linked List.
  * @list: The Doubly Linked List to be sorted.
  */
 void cocktail_sort_list(listint_t **list)
