@@ -9,12 +9,12 @@
  */
 unsigned int pow_10(unsigned int power)
 {
-        unsigned int index1, result;
+	unsigned int index1, result;
 
-        result = 1;
-        for (index1 = 0; index1 < power; index1++)
-                result *= 10;
-        return (result);
+	result = 1;
+	for (index1 = 0; index1 < power; index1++)
+		result *= 10;
+	return (result);
 }
 
 /**
@@ -29,9 +29,9 @@ unsigned int pow_10(unsigned int power)
  */
 unsigned int count_sort(int *array, size_t size, unsigned int digit)
 {
-	int index1, count[10] = {0};
+	int i, count[10] = {0};
 	int *copy = NULL;
-	size_t index2, temp, total = 0;
+	size_t j, temp, total = 0;
 	unsigned int dp1, dp2, sort = 0;
 
 	dp2 = pow_10(digit - 1);
@@ -39,26 +39,26 @@ unsigned int count_sort(int *array, size_t size, unsigned int digit)
 	copy = malloc(sizeof(int) * size);
 	if (copy == NULL)
 		exit(1);
-	for (index2 = 0; index2 < size; index2++)
+	for (j = 0; j < size; j++)
 	{
-		copy[index2] = array[index2];
-		if (array[index2] / dp1 != 0)
+		copy[j] = array[j];
+		if (array[j] / dp1 != 0)
 			sort = 1;
 	}
-	for (index1 = 0; index1 < 10 ; index1++)
-		count[index1] = 0;
-	for (index2 = 0; index2 < size; index2++)
-		count[(array[index2] % dp1) / dp2] += 1;
-	for (index1 = 0; index1 < 10; index1++)
+	for (i = 0; i < 10 ; i++)
+		count[i] = 0;
+	for (j = 0; j < size; j++)
+		count[(array[j] % dp1) / dp2] += 1;
+	for (i = 0; i < 10; i++)
 	{
-		temp = count[index1];
-		count[index1] = total;
+		temp = count[i];
+		count[i] = total;
 		total += temp;
 	}
-	for (index2 = 0; index2 < size; index2++)
+	for (j = 0; j < size; j++)
 	{
-		array[count[(copy[index2] % dp1) / dp2]] = copy[index2];
-		count[(copy[index2] % dp1) / dp2] += 1;
+		array[count[(copy[j] % dp1) / dp2]] = copy[j];
+		count[(copy[j] % dp1) / dp2] += 1;
 	}
 	free(copy);
 	return (sort);
@@ -74,13 +74,13 @@ unsigned int count_sort(int *array, size_t size, unsigned int digit)
  */
 void radix_sort(int *array, size_t size)
 {
-        unsigned int index1, sort = 1;
+	unsigned int index1, sort = 1;
 
-        if (array == NULL || size < 2)
-                return;
-        for (index1 = 1; sort == 1; index1++)
-        {
-                sort = count_sort(array, size, index1);
-                print_array(array, size);
-        }
+	if (array == NULL || size < 2)
+		return;
+	for (index1 = 1; sort == 1; index1++)
+	{
+		sort = count_sort(array, size, index1);
+		print_array(array, size);
+	}
 }
